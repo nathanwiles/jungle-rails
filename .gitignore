@@ -8,6 +8,9 @@
 # TODO Comment out this rule if environment variables can be committed
 .env
 
+# ignore generated images from database
+/public/uploads
+
 ## Environment normalization:
 /.bundle
 /vendor/bundle
