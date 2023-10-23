@@ -5,11 +5,16 @@
       <span><%= product.name %></span>
       <span><%= humanized_money_with_symbol product.price %></span>
     </h1>
-  <% end%>
+  <% end %>
   <div>
-    <%= button_to add_item_cart_path(product_id: product.id), class: 'btn' ,
+    <% if product.quantity == 0 %>
+      <span class='btn soldout-red'>Sold Out</span>
+      <span class ='btn soldout-green'><%= fa_icon "shopping-cart", text: 'Add' %></span>
+    <% else %>
+      <%= button_to add_item_cart_path(product_id: product.id), class: 'btn' ,
     method: :post do %>
-      <%= fa_icon "shopping-cart", text: 'Add' %> 
+        <%= fa_icon "shopping-cart", text: 'Add' %>
+      <% end %>
     <% end %>
   </div>
 </article>
