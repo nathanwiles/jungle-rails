@@ -9,7 +9,7 @@
 .env
 
 # ignore generated images from database
-/public/uploads
+/public/uploads/product/*
 
 ## Environment normalization:
 /.bundle
