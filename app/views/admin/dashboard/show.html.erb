@@ -10,7 +10,7 @@
     <% @metrics.each do |metric| %>
       <tr>
         <td><%= metric[:name] %></td>
-        <td><%= link_to admin_products, class: "nav-link" do %><%= metric[:value] %><% end %></td>
+        <td><%= link_to "admin_products", class: "nav-link" do %><%= metric[:value] %><% end %></td>
       </tr>
     <% end %>
   </tbody>
