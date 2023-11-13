@@ -60,4 +60,32 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return a user when email and password are correct' do
+      @user = User.new(name: 'test', email: 'test', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(User.authenticate_with_credentials('test', 'password')).to eq(@user)
+    end
+    it 'should return nil when email is not found' do
+      @user = User.new(name: 'test', email: 'test', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(User.authenticate_with_credentials('notfound', 'password')).to be nil
+    end
+    it 'should return nil when password is incorrect' do
+      @user = User.new(name: 'test', email: 'test', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(User.authenticate_with_credentials('test', 'notpassword')).to be nil
+    end
+    it 'should return user when email is correct but has leading/trailing whitespace' do
+      @user = User.new(name: 'test', email: 'test', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(User.authenticate_with_credentials('  test  ', 'password')).to eq(@user)
+    end
+    it 'should return user when email is correct but has wrong case' do
+      @user = User.new(name: 'test', email: 'test', password: 'password', password_confirmation: 'password')
+      @user.save
+      expect(User.authenticate_with_credentials('TEST', 'password')).to eq(@user)
+    end
+  end
 end
